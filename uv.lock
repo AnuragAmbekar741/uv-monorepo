@@ -12,6 +12,7 @@ members = [
     "api",
     "shared",
     "uv-monorepo",
+    "webhooks",
     "workers",
 ]
 
@@ -1423,6 +1424,17 @@ sdist = { url = "https://files.pythonhosted.org/packages/35/a2/8e3becb46433538a3
 wheels = [
     { url = "https://files.pythonhosted.org/packages/68/5a/199c59e0a824a3db2b89c5d2dade7ab5f9624dbf6448dc291b46d5ec94d3/wcwidth-0.6.0-py3-none-any.whl", hash = "sha256:1a3a1e510b553315f8e146c54764f4fb6264ffad731b3d78088cdb1478ffbdad", size = 94189, upload-time = "2026-02-06T19:19:39.646Z" },
 ]
+
+[[package]]
+name = "webhooks"
+version = "0.1.0"
+source = { virtual = "services/webhooks" }
+dependencies = [
+    { name = "shared" },
+]
+
+[package.metadata]
+requires-dist = [{ name = "shared", editable = "packages/shared" }]
 
 [[package]]
 name = "workers"

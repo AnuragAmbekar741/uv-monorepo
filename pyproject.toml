@@ -22,4 +22,5 @@ members = [
     "services/api",
     "services/workers",
     "services/agents",
+    "services/webhooks",
 ]
