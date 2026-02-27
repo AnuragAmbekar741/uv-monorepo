@@ -1,3 +1,8 @@
+[project]
+name = "uv-monorepo"
+version = "0.1.0"
+description = "Production monorepo with FastAPI, Strawberry GraphQL, Celery, and LangGraph"
+
 [tool.ruff]
   line-length = 120
   target-version = "py312"
@@ -6,8 +11,12 @@
 
   [tool.pytest.ini_options]
   asyncio_mode = "auto"
-  log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s
-  (%(filename)s:%(lineno)s)"
+  log_cli_format = "%(asctime)s [%(levelname)8s] %(message)s (%(filename)s:%(lineno)s)"
 
   [tool.bandit]
   skips = ["B101", "B311", "B110"]
+
+[tool.uv.workspace]
+members = [
+    "packages/shared",
+]
