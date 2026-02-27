@@ -21,4 +21,5 @@ members = [
     "packages/shared",
     "services/api",
     "services/workers",
+    "services/agents",
 ]
