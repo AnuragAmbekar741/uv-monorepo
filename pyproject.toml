@@ -20,4 +20,5 @@ description = "Production monorepo with FastAPI, Strawberry GraphQL, Celery, and
 members = [
     "packages/shared",
     "services/api",
+    "services/workers",
 ]
