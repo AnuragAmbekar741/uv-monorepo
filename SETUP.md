@@ -152,12 +152,61 @@ uv add shared --editable ../../packages/shared
 mkdir -p app && touch app/__init__.py
 ```
 
-### ⏹️ Phase 8: Webhooks Service (Quick Init)
+### ✅ Phase 8: Webhooks Service (Quick Init)
 ```bash
 cd services/webhooks
 uv init
 uv add shared --editable ../../packages/shared
 mkdir -p app && touch app/__init__.py
+```
+
+### ✅ Phase 9: UV Workspace Configuration
+```bash
+# Root pyproject.toml already defines workspace:
+cat pyproject.toml | grep -A 10 "tool.uv.workspace"
+
+# Expected output:
+# [tool.uv.workspace]
+# members = [
+#     "packages/shared",
+#     "services/api",
+#     "services/workers",
+#     "services/agents",
+#     "services/webhooks",
+# ]
+
+# Verify workspace
+ls -la uv.lock  # Root lock file exists
+```
+
+**Workspace Features:**
+- ✅ Single root `uv.lock` for all dependencies
+- ✅ Each service can reference `shared` with `workspace = true`
+- ✅ Unified dependency resolution across all members
+- ✅ Clean isolation: each service has its own pyproject.toml
+
+**Files Structure:**
+```
+./
+├── pyproject.toml          # Workspace root + tool configs
+├── uv.lock                 # Single lock file for all deps
+├── packages/shared/
+│   ├── pyproject.toml      # Shared library config
+│   ├── src/shared/
+│   └── uv.lock             # Auto-generated (optional)
+└── services/
+    ├── api/
+    │   ├── pyproject.toml  # Depends on shared (workspace)
+    │   └── app/
+    ├── workers/
+    │   ├── pyproject.toml  # Depends on shared (workspace)
+    │   └── app/
+    ├── agents/
+    │   ├── pyproject.toml  # Depends on shared (workspace)
+    │   └── app/
+    └── webhooks/
+        ├── pyproject.toml  # Depends on shared (workspace)
+        └── app/
 ```
 
 ---
@@ -221,8 +270,9 @@ docker compose -f infra/docker-compose.yml up -d
 
 ## Next Steps
 
-1. ✅ Complete agents/webhooks quick init
-2. ⏳ Test workers (celery + beat)
-3. ⏳ Create UV workspace config (Phase 8)
-4. ⏳ GitLab CI pipelines (Phase 9)
-5. 🔄 Commit everything
+1. ✅ Complete agents/webhooks quick init (Phase 7-8)
+2. ✅ Create UV workspace config (Phase 9)
+3. ⏳ Test workers (celery + beat)
+4. ⏳ GitLab CI pipelines (Phase 10)
+5. ⏳ Docker Compose for full stack (Phase 11)
+6. 🔄 Commit everything to git
